@@ -1,5 +1,5 @@
 <template lang="html">
-  <select class="select" v-model="selectedValue">
+  <select class="select" v-model="selectedValue" v-on:change="changePeriod()">
     <option v-for="(period, i) in periods" v-bind:value="i+1">{{period[i+1]}}</option>
   </select>
 </template>
@@ -27,10 +27,14 @@ export default {
       .catch(e => {
         console.log("ERROR! " + e)
       })
+    },
+
+    changePeriod() {
+      this.$emit('setPeriod', this.selectedValue);
     }
   },
 
-  mounted() {  
+  mounted() {
     this.getPeriodList();
   }
 }

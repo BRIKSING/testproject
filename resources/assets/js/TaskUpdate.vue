@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="show-time current-font pos">
     <label><span>Name</span><input type="text" class="from-element" v-model="taskName"/></label>
-    <label><span>Description</span><input type="text" class="from-element" v-model="taskDesc"/></label>
-    <label><span>Period</span><ListPeriod v-bind:period="taskPeriod"></ListPeriod></label>
+    <label><span @click="met()">Description</span><input type="text" class="from-element" v-model="taskDesc"/></label>
+    <label><span>Period</span><ListPeriod v-on:setPeriod="setPeriodFromSelect" v-bind:period="taskPeriod"></ListPeriod></label>
     <label v-if="taskIsCreate"><span>Date</span><input type="text" class="from-element" v-model="taskDate"/></label>
     <button @click="UpdateTask()"><slot></slot></button>
   </div>
@@ -52,6 +52,14 @@ export default {
       .catch(e => {
         console.log("ERROR! " + e)
       })
+    },
+
+    setPeriodFromSelect(period) {
+      this.taskPeriod = period;
+    },
+
+    met() {
+      console.log('sd');
     }
   },
 

@@ -96,6 +96,8 @@ class TaskController extends Controller
 
       $resultTasks = $this->setDoingsOnCalendar($otherTasks, $resultTasks, $days, $month, $year);
 
+      // dd($resultTasks);
+
       return [
         'userTasks' => $resultTasks
       ];
@@ -136,13 +138,18 @@ class TaskController extends Controller
               $curMonth = mb_strlen($month) > 1 ? $month : "0".$month;
               $curDate = preg_replace("/(\d{1,2})-(\d{1,2})$/", $curMonth."-".$curDay, $task['date']);
               $curDayOfWeek = date("w", strtotime($curDate));
-
+                // dump([
+                //   'curDay' => $curDay,
+                //   'curMonth' => $curMonth,
+                //   'curDate' => $curDate,
+                //   'curDayOfWeek' => $curDayOfWeek,
+                //   'DayOfWeek'=> $dayOfWeek
+                // ]);
               if($curDayOfWeek == $dayOfWeek) {
                 $resultTasks[$i][] = $task;
               }
             }
-
-            $resultTasks[$taskDay][] = $task;
+            //$resultTasks[$taskDay][] = $task;
             break;
           case '4': //day
             for ($i = 1; $i <= $days; $i++) {
